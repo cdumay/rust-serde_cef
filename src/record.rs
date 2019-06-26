@@ -44,6 +44,22 @@ impl From<&str> for CefSeverity {
     }
 }
 
+impl From<CefSeverity> for u8 {
+    fn from(severity: CefSeverity) -> u8 {
+        match severity {
+            CefSeverity::String(desc) => match desc.as_str() {
+                "Unknown" => 0,
+                "Low" => 1,
+                "Medium" => 4,
+                "High" => 7,
+                "Very-High" => 9,
+                _ => 0
+            },
+            CefSeverity::U8(level) => level
+        }
+    }
+}
+
 impl fmt::Display for CefSeverity {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -52,6 +68,7 @@ impl fmt::Display for CefSeverity {
         }
     }
 }
+
 /// Device Event Class ID is a unique identifier per event-type.
 ///
 /// This can be a string or an integer.

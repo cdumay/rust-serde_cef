@@ -1,5 +1,3 @@
-use std::io::{Cursor, Write};
-
 use serde::Serialize;
 use serde_value::Value;
 
