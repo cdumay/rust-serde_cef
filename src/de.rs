@@ -54,7 +54,7 @@ fn parse_extensions(extensions: &str) -> BTreeMap<Value, Value> {
 pub fn from_str<'a, T>(value: &'a str) -> CefResult<CefRecord<T>> where T: Deserialize<'a> + Debug {
     let re = regex::Regex::new(match value.to_string().starts_with("CEF") {
         true => r"^CEF:(?P<version>\d)\|(?P<device_vendor>[^\|]+)\|(?P<device_product>[^\|]+)\|(?P<device_version>[^\|]+)\|(?P<signature_id>[^\|]+)\|(?P<signature>[^\|]+)\|(?P<severity>[^\|]+)\|(?P<extensions>.*)",
-        false => r"^(?P<headers>.*)CEF:(?P<version>\d)\|(?P<device_vendor>[^\|]+)\|(?P<device_product>[^\|]+)\|(?P<device_version>[^\|]+)\|(?P<signature_id>[^\|]+)\|(?P<signature>[^\|]+)\|(?P<severity>[^\|]+)\|(?P<extensions>.*)",
+        false => r"^(?P<headers>.*)\sCEF:(?P<version>\d)\|(?P<device_vendor>[^\|]+)\|(?P<device_product>[^\|]+)\|(?P<device_version>[^\|]+)\|(?P<signature_id>[^\|]+)\|(?P<signature>[^\|]+)\|(?P<severity>[^\|]+)\|(?P<extensions>.*)",
     })?;
     let captures = re.captures(value)?;
 
