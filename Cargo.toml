@@ -1,0 +1,23 @@
+[package]
+name = "serde_cef"
+version = "0.1.0"
+authors = ["OVH SAS <github@ovh.net>"]
+edition = "2018"
+license = "BSD-3-Clause"
+license-file = "LICENSE"
+description = "CEF serialization using serde."
+keywords = ["serde", "CEF"]
+readme = "README.md"
+repository = "https://github.com/cdumay/rust-serde_cef"
+
+[features]
+ovh-ldp = ["serde-value-flatten/ovh-ldp"]
+
+[dependencies]
+serde = "1.0"
+serde-value = "0.6"
+serde_derive = "1.0"
+serde_json = "1.0"
+regex = "1.1"
+chrono = { version = "0.4", features = ["serde"] }
+serde-value-flatten = "0.1"
