@@ -1,9 +1,5 @@
 use std::fmt;
 
-use chrono::{Datelike, Local, NaiveDateTime};
-
-use crate::result::CefResult;
-
 /// Severity is a string or integer and reflects the importance of the event.
 ///
 /// The valid string values are:
@@ -130,14 +126,3 @@ pub struct CefRecord<T: ?Sized> {
     pub extensions: T,
 }
 
-impl<T: ?Sized> CefRecord<T> {
-    pub fn extract_ts_from_headers(headers: &str) -> CefResult<f64> {
-        // Syslog doesn't provide year Oo, we append it....
-        let data = format!("{} {}", Local::now().year(), &headers[0..15]);
-        Ok(NaiveDateTime::parse_from_str(&data, "%Y %b %d %H:%M:%S")?.timestamp() as f64)
-    }
-    pub fn extract_hostname_from_headers(headers: &str) -> CefResult<String> {
-        let re = regex::Regex::new(r".*\s+(?P<host>.*)\sCEF:\d+").unwrap();
-        Ok(re.captures(headers)?.name("host")?.as_str().to_string())
-    }
-}

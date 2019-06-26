@@ -103,6 +103,7 @@ pub use de::from_str;
 pub use record::{CefRecord, CefSeverity, CefSignatureId};
 pub use result::{CefError, CefResult};
 pub use ser::to_string;
+pub use utils::{extract_hostname_from_headers, extract_ts_from_headers, parse_ts};
 
 mod result;
 mod de;

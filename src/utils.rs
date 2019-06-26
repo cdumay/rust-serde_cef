@@ -1,6 +1,6 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 
-use chrono::{DateTime, FixedOffset, NaiveDateTime, Timelike};
+use chrono::{Datelike, DateTime, FixedOffset, Local, NaiveDateTime, Timelike};
 use serde_value::Value;
 
 use crate::result::{CefError, CefResult};
@@ -84,4 +84,15 @@ impl PreciseTimestamp {
 
 pub fn now() -> f64 {
     PreciseTimestamp::now().as_f64()
+}
+
+pub fn extract_ts_from_headers(headers: &str) -> CefResult<f64> {
+    // Syslog doesn't provide year Oo, we append it....
+    let data = format!("{} {}", Local::now().year(), &headers[0..15]);
+    parse_ts(&data)
+}
+
+pub fn extract_hostname_from_headers(headers: &str) -> CefResult<String> {
+    let re = regex::Regex::new(r".*\s+(?P<host>.*)\sCEF:\d+").unwrap();
+    Ok(re.captures(headers)?.name("host")?.as_str().to_string())
 }
