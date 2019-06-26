@@ -28,7 +28,7 @@ fn value2str(value: Value) -> String {
 pub fn to_string<T: ?Sized>(value: &CefRecord<T>) -> CefResult<String> where T: Serialize {
     let mut fields = String::new();
     if let Some(headers) = value.headers.clone() {
-        fields += &headers;
+        fields += &format!("{} ", headers);
     }
     fields += &format!(
         "CEF:{}|{}|{}|{}|{}|{}|{}|",
