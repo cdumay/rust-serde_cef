@@ -17,7 +17,6 @@ ovh-ldp = ["serde-value-flatten/ovh-ldp"]
 serde = "1.0"
 serde-value = "0.6"
 serde_derive = "1.0"
-serde_json = "1.0"
 regex = "1.1"
-chrono = { version = "0.4", features = ["serde"] }
+chrono = "0.4"
 serde-value-flatten = "0.1"

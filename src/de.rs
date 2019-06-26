@@ -1,8 +1,9 @@
 use std::collections::BTreeMap;
+use std::fmt::Debug;
+
+use serde_value::Value;
 
 use serde::Deserialize;
-use serde::export::fmt::Debug;
-use serde_value::Value;
 
 use crate::record::{CefRecord, CefSeverity, CefSignatureId};
 use crate::result::CefResult;
